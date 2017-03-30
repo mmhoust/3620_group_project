@@ -1,29 +1,39 @@
-bare metal pc for this assignment, except for flash pcs (green): use ARM
-each node can be given a startup command; this will be executed after the node itself is instantiated
-lustre file system is for mass storage
-to work with flash storage (the green set) just grab a bunch of nodes and use the same number of flash nodes as compute nodes we set up. mount the storage of the flash nodes as local_scratch inside of     the compute nodes, and use the flash nodes
+a picture of wrangler's layout: https://portal.wrangler.tacc.utexas.edu/
+lustre installation guide: http://cdn.opensfs.org/wp-content/uploads/2015/04/Lustre-101_Andrus.pdf
+wrangler architecture (and general user guide): https://portal.tacc.utexas.edu/user-guides/wrangler#wrangler-architecture
+
+for the wrangler diagram, orange is the computing nodes, green is the flash nodes, and blue is the parallel file system nodes. the user node is not shown.
+
+for the nodes, use bare metal pc for this assignment, except for flash pcs (green): use ARM
+in cloudlab, when editing a node, each node can be given a startup command; this will be executed after the node itself is instantiated. this is how we will install the software onto each node when instantiating it. 
+
+lustre file system is for mass, parallel storage
+
+to work with flash storage (the green set) just grab a bunch of nodes and use the same number of flash nodes as compute nodes we set up, i.e. 3 compute nodes = 3 flash nodes. mount the storage of the flash nodes as /local_scratch inside of the compute nodes as a network drive
+
 Example: 3 bare metal compute nodes, 3 ARM flash nodes (network drives, network file system), 1 bare metal user node (install SLURM to get jobs), two bare metal parallel file system nodes (need to have LUSTRE installed)
 
-try to link the three flash nodes, but if we can't just mount them 1:1 with the computing nodes
-ARM does NOT do any computing - it just stores data. it's strictly for mounting onto the compute nodes so that it can become local_scratch
+try to link the three flash nodes into one network drive, but if we can't, just mount them 1:1 with the computing nodes i.e. one computing node gets one flash node.
+
+ARM nodes, the flash memory do NOT do any computing - they just store data. they're strictly for mounting onto the compute nodes so that they can become local_scratch
 
 once the architecture is up, send it to Git so that everyone can work on different parts of the machine. 
 
-a static IP will result in all of the nodes communicating separately, but still being compatible with one another. the installation guide will provind more info.
-lustre installation guide: http://cdn.opensfs.org/wp-content/uploads/2015/04/Lustre-101_Andrus.pdf
+a static IP will result in all of the nodes communicating separately, but still being compatible with one another. the installation guide for lustre will provide more info.
 
-for installing things such as lustre or slurm, onec an use the tarball or the command execution. professor ngo recommends the execute command option.
+for installing things such as lustre or slurm, one can use the tarball or the command execution. professor ngo recommends the execute command option.
+
 a more convenient method than executing commands one by one would be to upload a user script to Github or another repo, setting a command to download the script, setting the script to be executable, and then executing the script to install everything.
 
-lustre is like scratch2 or scratch3. it holds much more data at any given time, but is slower to access. by contrast, local scratch is directly mounted, so it is faster. 
+lustre is like scratch2 or scratch3. it holds much more data at any given time then the flash memory, but is slower to access. by contrast, the flash memory /local_scratch is directly mounted, so it is faster. 
 
 scheduler is set up on user node and on scheduler nodes as well.
-the person doing the scheduler and the person doing the user node will both have to work with the user node; the scheduler is set up on the user node and the daemon is on the compute nodes. 
+the person doing the scheduler and the person doing the user node will both have to work with the user node; the scheduler is set up on the user node and the scheduler daemon is on the compute nodes. 
 the person setting up the main node needs to set up the module loading for mpi4pi and others. 
 
 sudo apt-get does not work for SLURM. 
 
-on palmetto, /software/modulefiles/openmpi/1.10.3 will show us a modulefile example
+on palmetto, "more /software/modulefiles/openmpi/1.10.3" will show us a modulefile example
 a module file goes to this directory and adds the specified module to the path
 
 /software should be mounted to the compute nodes from the user node with NFS; /home should do the same
