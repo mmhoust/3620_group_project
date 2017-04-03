@@ -60,4 +60,4 @@ chkconfig lustre --add
 chkconfig lustre on
 
 #restart to add the new kernel
-/sbin/shutdown -r now
+#/sbin/shutdown -r now
