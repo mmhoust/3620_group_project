@@ -32,15 +32,15 @@ echo 'disable=kern*,lustre*'>>/etc/yum.conf
 rpm -Uvh kernel-firmware-2.6.32-504.8.1.el6_lustre.x86_64.rpm
 
 #use yum to do the rest of the installs
-yum install kernel-2.6.32-504.8.1.el6_lustre.x86_64.rpm
-yum install lustre-2.7.0-2.6.32_504.8.1.el6_lustre.x86_64.x86_64.rpm
-yum install lustre-modules-2.7.0-2.6.32_504.8.1.el6_lustre.x86_64.x86_64.rpm
-yum install lustre-osd-ldiskfs-2.7.0-2.6.32_504.8.1.el6_lustre.x86_64.x86_64.rpm
-yum install lustre-osd-ldiskfsmount-2.7.0-2.6.32_504.8.1.el6_lustre.x86_64.x86_64.rpm
-yum install e2fsprogs-1.42.12.wc1-7.el6.x86_64.rpm
-yum install e2fsprogs-libs-1.42.12.wc1-7.el6.x86_64.rpm
-yum install libcom_err-1.42.12.wc1-7.el6.x86_64.rpm
-yum install libss-1.42.12.wc1-7.el6.x86_64.rpm
+apt-get install ./kernel-2.6.32-504.8.1.el6_lustre.x86_64.rpm
+apt-get install ./lustre-2.7.0-2.6.32_504.8.1.el6_lustre.x86_64.x86_64.rpm
+apt-get install ./lustre-modules-2.7.0-2.6.32_504.8.1.el6_lustre.x86_64.x86_64.rpm
+apt-get install ./lustre-osd-ldiskfs-2.7.0-2.6.32_504.8.1.el6_lustre.x86_64.x86_64.rpm
+apt-get install ./lustre-osd-ldiskfsmount-2.7.0-2.6.32_504.8.1.el6_lustre.x86_64.x86_64.rpm
+apt-get install ./e2fsprogs-1.42.12.wc1-7.el6.x86_64.rpm
+apt-get install ./e2fsprogs-libs-1.42.12.wc1-7.el6.x86_64.rpm
+apt-get install ./libcom_err-1.42.12.wc1-7.el6.x86_64.rpm
+apt-get install ./libss-1.42.12.wc1-7.el6.x86_64.rpm
 
 
 #configure LNET
